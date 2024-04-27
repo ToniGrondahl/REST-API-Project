@@ -1,6 +1,7 @@
 const Product = require("../models/product.model");
 
-const getProducts = async (req, res) => {
+
+const getAll = async (req, res) => {
   try {
     const products = await Product.find({});
     res.status(200).json(products);
@@ -8,6 +9,7 @@ const getProducts = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 const getProduct = async (req, res) => {
   try {
@@ -28,6 +30,7 @@ const createProduct = async (req, res) => {
   }
 };
 
+
 const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
@@ -45,6 +48,7 @@ const updateProduct = async (req, res) => {
   }
 };
 
+
 const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
@@ -61,8 +65,9 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+
 module.exports = {
-  getProducts,
+  getAll,
   getProduct,
   createProduct,
   updateProduct,
