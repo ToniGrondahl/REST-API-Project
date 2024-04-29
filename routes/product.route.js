@@ -6,11 +6,11 @@ const {getAll, getProduct, createProduct, updateProduct, deleteProduct} = requir
 // Get all products
 router.get('/', getAll);
 
-// Get a product by ID
-router.get("/:id", getProduct);
-
 // Create a new product
 router.post("/", createProduct);
+
+// Get a product by ID
+router.get("/:id", getProduct);
 
 // Update a product by ID
 router.put("/:id", updateProduct);

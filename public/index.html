@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Management</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
+    <h1>REST API Project</h1>
     <div class="container">
       <table class="table">
         <thead>
@@ -72,20 +74,20 @@
                 <input type="text" class="form-control" id="productName" required>
             </div>
             <div class="form-group">
-                <label for="productName">Product Quantity:</label>
-                <input type="number" class="form-control" id="productQuantity" required>
-            </div>
-            <div class="form-group">
                 <label for="productPrice">Product Price:</label>
                 <input type="text" class="form-control" id="productPrice" required>
+            </div>
+            <div class="form-group">
+                <label for="productQuantity">Product Quantity:</label>
+                <input type="number" class="form-control" id="productQuantity" required>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
-        <div class="col-12 mt-5">
-            <table class="table-striped table-dark">
-                <thead>
-                    <tr>
+        <div class="col-10 mt-5">
+            <table class="table table-striped table-dark">
+                <thead class="thead-dark">
+                    <tr class="tablerow">
                         <th>Product name</th>
                         <th>Product price</th>
                         <th>Product Quantity</th>
@@ -93,97 +95,13 @@
                 </thead>
                 <tbody id="productTableBody"></tbody>
                 <tr>
-                    <td>jotain</td>
-                    <td>sefef</td>
                     <td>
-                    <a href="#" class="btn btn-warning btn-sm edit">Edit</a>
-                    <a href="#" class="btn btn-danger btn-sm delete">Delete</a>
                 </td>
                 </tr>
             </table>
         </div>
     </div>
     
-    <script>
-
-          // Fetch data from API
-          fetch('http://localhost:3000/api/getall')
-            .then(response => response.json())
-            .then(products => {
-                // Generate HTML for each product
-                const productRows = products.map(product => `
-                    <tr>
-                        <td>${product.name}</td>
-                        <td>${product.price}</td>
-                    </tr>
-                `);
-
-                // Append product rows to table body
-                document.getElementById('productTableBody').innerHTML = productRows.join('');
-            })
-            .catch(error => console.error('Error fetching products:', error));
-
-
-
-
-        // After successfully adding a product, fetch the latest product list and update the UI
-const fetchAndDisplayProducts = () => {
-    fetch('/api/products')
-        .then(response => response.json())
-        .then(products => {
-            // Update the UI to display the latest product list
-            const productListDiv = document.getElementById("productList");
-            productListDiv.innerHTML = ""; // Clear previous product list
-            products.forEach(product => {
-                const productItem = document.createElement("div");
-                productItem.textContent = `${product.name} - $${product.price}`;
-                productListDiv.appendChild(productItem);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching products:', error);
-            // Optionally, show an error message
-        });
-};
-
-        document.getElementById("addProductForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // Get form data
-            const productName = document.getElementById("productName").value;
-            const productQuantity = document.getElementById("productQuantity").value;
-            const productPrice = document.getElementById("productPrice").value;
-
-            // Create product object
-            const productData = {
-                name: productName,
-                quantity: productQuantity,
-                price: productPrice
-            };
-
-            // Make AJAX POST request to API endpoint
-            fetch('/api/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(productData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle response
-                console.log(data); // Log response from the server
-                // Optionally, update UI or show a success message
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // Optionally, show an error message
-            });
-        });
-
-    </script>
-</body>
-</html>
-
+    <script src="ui.js"></script>
 </body>
 </html>

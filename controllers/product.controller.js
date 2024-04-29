@@ -10,13 +10,15 @@ const getAll = async (req, res) => {
   }
 };
 
-
 const getProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await Product.findById(id);
+    console.log("Product ID:", id); // Log the ID parameter
+    const product =  await Product.findById(id);
+    console.log("Product:", product); // Log the retrieved product
     res.status(200).json(product);
   } catch (error) {
+    console.error("Error:", error); // Log any errors
     res.status(500).json({ message: error.message });
   }
 };
@@ -27,7 +29,7 @@ const createProduct = async (req, res) => {
     res.status(200).json(product);
   } catch (error) {
     res.status(500).json({ message: error.message });
-  }
+  }  
 };
 
 

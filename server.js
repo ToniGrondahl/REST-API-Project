@@ -16,13 +16,13 @@ app.use("/api/getall", productRoute);
 app.use("/api/add", productRoute);
 
 // get a product by id
-app.use("api/product/:id", productRoute);
+app.use("/api/product/:id", productRoute);
 
 // update product by id
-app.use("api/update/:id", productRoute);
+app.use("/api/update/:id", productRoute);
 
 // delete product by id
-app.use("api/delete/:id", productRoute);
+app.use("/api/delete/:id", productRoute);
 
 
 // Define the root route
