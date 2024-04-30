@@ -1,5 +1,4 @@
-         
-         // Fetch data from API
+          // Fetch data from API
           fetch('http://localhost:3000/api/getall')
             .then(response => response.json())
             .then(products => {
@@ -38,7 +37,7 @@ const fetchAndDisplayProducts = () => {
         })
         .catch(error => {
             console.error('Error fetching products:', error);
-            // Optionally, show an error message
+            // show an error message
         });
 };
 
@@ -54,7 +53,7 @@ const fetchAndDisplayProducts = () => {
             const productData = {
                 name: productName,
                 quantity: productQuantity,
-                price: productPrice
+                price: productPrice,
             };
 
             // Make AJAX POST request to API endpoint
@@ -91,83 +90,52 @@ const fetchAndDisplayProducts = () => {
         }
 
 
-        //                     // Edit button click event
-// document.querySelectorAll('.edit').forEach((btn, index) => {
-//     btn.addEventListener('click', function(event) {
-//         event.preventDefault();
 
-//         // Fetch the product data from the table row
-//         const productName = document.querySelectorAll('#productTableBody td:nth-child(1)')[index].textContent;
-//         const productPrice = document.querySelectorAll('#productTableBody td:nth-child(2)')[index].textContent;
-//         const productQuantity = document.querySelectorAll('#productTableBody td:nth-child(3)')[index].textContent;
+// Edit button click event
+document.querySelectorAll('.edit').forEach((btn, index) => {
+    btn.addEventListener('click', function(event) {
+        event.preventDefault();
 
-//         // Populate the form fields with the product data
-//         document.getElementById('productName').value = productName;
-//         document.getElementById('productPrice').value = productPrice;
-//         document.getElementById('productQuantity').value = productQuantity;
+        // Fetch the product data from the table row
+        const productName = document.querySelectorAll('#productTableBody td:nth-child(1)')[index].textContent;
+        const productPrice = document.querySelectorAll('#productTableBody td:nth-child(2)')[index].textContent;
+        const productQuantity = document.querySelectorAll('#productTableBody td:nth-child(3)')[index].textContent;
+        
 
-//         // Store the ID of the product to be edited (you might need to have IDs in your tab
-//         const productId = ""; // You need to fetch the product ID from your data structure
+        // Populate the form fields with the product data
+        document.getElementById('productName').value = productName;
+        document.getElementById('productPrice').value = productPrice;
+        document.getElementById('productQuantity').value = productQuantity;
 
-//         // Update form submission to handle edit
-//         document.getElementById('addProductForm').addEventListener('submit', function(event) {
-//             event.preventDefault();
-            
-//             // Get updated form data
-//             const updatedProductName = document.getElementById('productName').value;
-//             const updatedProductPrice = document.getElementById('productPrice').value;
-//             const updatedProductQuantity = document.getElementById('productQuantity').value;
+        // Show a message to inform the user that they can only edit after the product is added
+        alert("You can only edit this product after it has been added to the database.");
+    });
+}); 
 
-//             // Make AJAX PUT request to update product
-//             fetch(`/api/update/${productId}`, {
-//                 method: 'PUT',
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify({
-//                     name: updatedProductName,
-//                     price: updatedProductPrice,
-//                     quantity: updatedProductQuantity
-//                 })
-//             })
-//             .then(response => response.json())
-//             .then(data => {
-//                 console.log(data); // Log response from the server
-//                 // Optionally, update UI or show a success message
-//                 fetchAndDisplayProducts(); // Refresh product list after update
-//             })
-//             .catch(error => {
-//                 console.error('Error:', error);
-//                 // Optionally, show an error message
-//             });
-//         });
-//     });
-// }); 
+// Delete button click event
+document.querySelectorAll('.delete').forEach((btn, index) => {
+    btn.addEventListener('click', function(event) {
+        event.preventDefault();
 
-// // Delete button click event
-// document.querySelectorAll('.delete').forEach((btn, index) => {
-//     btn.addEventListener('click', function(event) {
-//         event.preventDefault();
+        // Fetch the product ID from the table row
+        const productId = products[index]._id; // Assuming you have the product ID in your products array
 
-//         // Fetch the product ID from the table row
-//         const productId = ""; // You need to fetch the product ID from your data structure
-
-//         // Make AJAX DELETE request to delete product
-//         fetch(`/api/delete/${productId}`, {
-//             method: 'DELETE'
-//         })
-//         .then(response => {
-//             if (response.ok) {
-//                 // Optionally, update UI to remove the deleted product
-//                 document.querySelectorAll('#productTableBody tr')[index].remove();
-//             } else {
-//                 console.error('Error deleting product:', response.status);
-//                 // Optionally, show an error message
-//             }
-//         })
-//         .catch(error => {
-//             console.error('Error:', error);
-//             // Optionally, show an error message
-//         });
-//     });
-// });
+        // Make AJAX DELETE request to delete product
+        fetch(`/api/delete/${productId}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                // Optionally, update UI to remove the deleted product
+                document.querySelectorAll('#productTableBody tr')[index].remove();
+            } else {
+                console.error('Error deleting product:', response.status);
+                // Optionally, show an error message
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Optionally, show an error message
+        });
+    });
+});

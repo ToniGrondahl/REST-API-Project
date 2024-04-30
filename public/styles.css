@@ -4,46 +4,12 @@ h1 {
     padding-bottom: 20px;
 }
 
-.table {
-    padding-left: 50px;
-    width: fit-content;
-    
-}
-
-.container {
+h2 {
+    text-align: center;
     padding-top: 20px;
-    width: fit-content;
-
-}
-
-.table-dark {
-    padding-left: 50px;
-    padding-top: 50px;
-}
-
-.productTableBody {
-    padding-top: 60px;
-}
-
-body {
-    background-color: black;
-}
-
-.btn {
-    padding-top: 100px;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 .form-group {
     padding-bottom: 20px;
     
-}
-
-.thead {
-    width: auto;
-}
-
-.tablerow {
-    width: auto;
 }
