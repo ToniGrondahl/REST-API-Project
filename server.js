@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const Product = require("./models/product.model.js");
 const productRoute = require("./routes/product.route.js");
 const app = express();
+const port = process.env.PORT || 4000;
 
 // middleware
 app.use(express.json());
@@ -34,8 +35,8 @@ app.get('/', (req, res) => {
 mongoose.connect('mongodb+srv://tonigrondahl:PY5Iawq1CZSbqQE6@backenddb.malctez.mongodb.net/Node-API?retryWrites=true&w=majority&appName=BackendDB')
   .then(() => {
     // Start the server when the database connection is successful
-    app.listen(3000, () => {
-        console.log('Server is running on port 3000');
+    app.listen(port, () => {
+        console.log(`Server is running on port 3000 ${port}`);
     });
     console.log('Connected to the database!');
 })
